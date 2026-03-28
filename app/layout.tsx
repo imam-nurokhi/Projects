@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://imam-nurokhi.dev"),
   title: "Muhammad Imam Nurokhi | IT Product Architect & Full Stack Developer",
   description:
     "Portfolio of Muhammad Imam Nurokhi — IT Product Architect, Full Stack Developer (React/Node.js/Next.js), Odoo ERP Specialist, and UI/UX Enthusiast based in Indonesia.",
