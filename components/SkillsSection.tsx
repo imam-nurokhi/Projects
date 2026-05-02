@@ -80,7 +80,7 @@ export default function SkillsSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-8 md:mb-16"
         >
           <h2
             className="text-[clamp(2rem,4vw,3.5rem)] font-bold mb-4"
