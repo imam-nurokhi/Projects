@@ -110,11 +110,11 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
-          className="flex flex-wrap gap-4 justify-center"
+          className="flex flex-col md:flex-row gap-4 justify-center w-full md:w-auto max-w-md md:max-w-none"
         >
           <a
             href="#projects"
-            className="inline-flex items-center gap-2 px-6 md:px-8 py-2.5 md:py-3.5 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5"
+            className="flex md:inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-3.5 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 flex-1 md:flex-initial"
             style={{
               background: "linear-gradient(135deg, #6366f1, #f472b6)",
               boxShadow: "0 10px 40px rgba(99,102,241,0.3)",
@@ -127,7 +127,7 @@ export default function HeroSection() {
           </a>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-6 md:px-8 py-2.5 md:py-3.5 rounded-full text-sm font-semibold text-[#e2e8f0] bg-white/[0.03] border border-white/[0.08] backdrop-blur-[10px] transition-all duration-300 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-0.5"
+            className="flex md:inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-3.5 rounded-full text-sm font-semibold text-[#e2e8f0] bg-white/[0.03] border border-white/[0.08] backdrop-blur-[10px] transition-all duration-300 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-0.5 flex-1 md:flex-initial"
           >
             {isEn ? "Get In Touch" : "Hubungi Saya"}
           </a>
