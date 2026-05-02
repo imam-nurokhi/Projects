@@ -2,195 +2,164 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useLang } from "@/components/LangContext";
 
-const experiences = [
+const EXPERIENCES = [
   {
-    period: "2022 – Present",
-    role: "IT Product Architect",
-    company: "Qasir.id",
-    type: "Full-time",
-    location: "Jakarta, Indonesia",
-    color: "#00D4FF",
-    highlights: [
-      "Architected scalable microservices infrastructure serving 100K+ merchants",
-      "Led cross-functional product teams (Engineering, Design, QA) of 15+ members",
-      "Defined technical roadmap and system integration strategies for POS ecosystem",
-      "Implemented CI/CD pipelines reducing deployment time by 60%",
-      "Designed RESTful APIs and event-driven architecture patterns",
-    ],
+    date: "Dec 2025 – Present",
+    role: { en: "Tech Lead", id: "Tech Lead" },
+    company: "Nexora (Part of CBQA Global Group) — Jakarta",
+    highlights: {
+      en: [
+        "Spearhead end-to-end development of internal and external enterprise platforms",
+        "Direct technical strategy and mentor engineering teams",
+        "Ensure system integrity, security, and product scalability",
+        "Lead key projects: Audit-Q, NexERP, OneAlpha & OneDataHub, Odoo ERP",
+      ],
+      id: [
+        "Memimpin pengembangan end-to-end platform enterprise internal dan eksternal",
+        "Mengarahkan strategi teknis dan membimbing tim engineer",
+        "Memastikan integritas sistem, keamanan data, dan skalabilitas produk",
+        "Memimpin proyek kunci: Audit-Q, NexERP, OneAlpha & OneDataHub, Odoo ERP",
+      ],
+    },
   },
   {
-    period: "2020 – 2022",
-    role: "Lead QA Engineer",
-    company: "PT. INTI (Industri Telekomunikasi Indonesia)",
-    type: "Full-time",
-    location: "Bandung, Indonesia",
-    color: "#FFD700",
-    highlights: [
-      "Led QA team of 8 engineers for enterprise telecom software projects",
-      "Established automated testing frameworks (Selenium, Cypress, JUnit)",
-      "Reduced critical bugs in production by 75% through systematic QA processes",
-      "Collaborated with development teams on TDD and BDD methodologies",
-      "Managed test planning and quality standards for government-scale projects",
-    ],
+    date: "Feb 2024 – Nov 2025",
+    role: { en: "Senior IT Programmer", id: "Senior IT Programmer" },
+    company: "CBQA Global — Jakarta",
+    highlights: {
+      en: [
+        "Led debugging and feature development for mission-critical internal applications",
+        "Engineered robust Spring Boot and PostgreSQL backends",
+        "Integrated complex third-party APIs",
+        "Delivered strategic progress reports to key stakeholders",
+      ],
+      id: [
+        "Mengelola perbaikan sistem dan pengembangan fitur krusial aplikasi internal",
+        "Mengembangkan arsitektur backend menggunakan Spring Boot dan PostgreSQL",
+        "Mengintegrasikan API pihak ketiga yang kompleks",
+        "Menyusun laporan progres strategis bagi para pemangku kepentingan",
+      ],
+    },
   },
   {
-    period: "2019 – 2020",
-    role: "Full Stack Developer",
-    company: "PT. Sigma Cipta Caraka (Telkomsigma)",
-    type: "Full-time",
-    location: "South Tangerang, Indonesia",
-    color: "#00D4FF",
-    highlights: [
-      "Developed enterprise web applications using React.js and Node.js",
-      "Integrated third-party APIs and payment gateway systems",
-      "Optimized database queries improving performance by 40%",
-      "Contributed to Odoo ERP customization and module development",
-    ],
+    date: "Nov 2022 – Feb 2024",
+    role: { en: "Full-Stack Engineer", id: "Full-Stack Engineer" },
+    company: "Privat Talenta Indonesia — Jakarta",
+    highlights: {
+      en: [
+        "Architected and deployed core website systems and CMS from the ground up",
+        "Developed hybrid mobile applications for Android and iOS using Ionic and TypeScript",
+        "Enhanced platform reach and user engagement",
+      ],
+      id: [
+        "Merancang dan mengimplementasikan sistem CMS dan situs web inti dari awal",
+        "Membangun aplikasi mobile hybrid Android & iOS menggunakan Ionic dan TypeScript",
+        "Meningkatkan jangkauan platform dan keterlibatan pengguna",
+      ],
+    },
   },
   {
-    period: "2018 – 2019",
-    role: "Odoo Developer",
-    company: "PT. Solusi Dinamika Informatika",
-    type: "Full-time",
-    location: "Jakarta, Indonesia",
-    color: "#FFD700",
-    highlights: [
-      "Customized Odoo ERP modules for manufacturing and distribution clients",
-      "Developed Python-based business logic and automation workflows",
-      "Integrated Odoo with external systems via XML-RPC and REST APIs",
-      "Trained end-users and provided technical documentation",
-    ],
+    date: "Dec 2015 – Feb 2021",
+    role: { en: "Product Dev Team Lead & Engineer", id: "Product Dev Team Lead & Engineer" },
+    company: "Telunjuk.com — Indonesia",
+    highlights: {
+      en: [
+        "Headed the “Compas” project — a market insight platform for automated price tracking",
+        "Optimized performance for high-traffic load",
+        "Improved SEO visibility for the core CMS platform",
+        "Delivered e-commerce intelligence solutions",
+      ],
+      id: [
+        "Memimpin proyek “Compas” — platform intelijen pasar untuk pelacakan harga otomatis",
+        "Mengoptimalkan performa untuk trafik tinggi",
+        "Meningkatkan visibilitas SEO untuk platform CMS inti",
+        "Menghadirkan solusi intelijen e-commerce",
+      ],
+    },
   },
 ];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, x: -40 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
-  },
-};
 
 export default function ExperienceSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { lang } = useLang();
+  const isEn = lang === "en";
 
   return (
-    <section id="experience" className="py-24 px-6 relative overflow-hidden" ref={ref}>
-      <div
-        className="absolute top-1/2 left-0 w-96 h-96 rounded-full pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, rgba(0,212,255,0.04) 0%, transparent 70%)",
-          transform: "translateY(-50%)",
-        }}
-      />
-
-      <div className="max-w-5xl mx-auto">
+    <section
+      id="experience"
+      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-24"
+      style={{ background: "linear-gradient(180deg, transparent, rgba(244,114,182,0.02), transparent)" }}
+      ref={ref}
+    >
+      <div className="max-w-4xl w-full">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-[#FFD700] text-sm font-medium tracking-widest uppercase mb-4 block">
-            Career Journey
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold font-serif mb-4">
-            Experience &{" "}
-            <span className="gradient-text-blue italic">Timeline</span>
+          <h2
+            className="text-[clamp(2rem,4vw,3.5rem)] font-bold mb-4"
+            style={{ fontFamily: "Space Grotesk, sans-serif" }}
+          >
+            {isEn ? "Work Experience" : "Pengalaman Kerja"}
           </h2>
-          <p className="text-white/50 max-w-xl mx-auto">
-            A track record of leading teams, architecting systems, and delivering scalable solutions.
+          <p className="text-[#94a3b8] text-lg">
+            {isEn
+              ? "A journey through my professional career building enterprise solutions"
+              : "Perjalanan karir profesional saya membangun solusi enterprise"}
           </p>
         </motion.div>
 
-        <div className="relative">
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2" />
-
-          <motion.div
-            className="absolute left-8 md:left-1/2 top-0 w-px bg-gradient-to-b from-[#00D4FF] via-[#FFD700] to-[#00D4FF] -translate-x-1/2 origin-top"
-            initial={{ scaleY: 0 }}
-            animate={isInView ? { scaleY: 1 } : {}}
-            transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
-            style={{ height: "100%" }}
+        {/* Timeline */}
+        <div className="relative pl-8">
+          {/* Vertical line */}
+          <div
+            className="absolute left-0 top-0 bottom-0 w-0.5"
+            style={{ background: "linear-gradient(to bottom, #6366f1, #f472b6, transparent)" }}
           />
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="space-y-12"
-          >
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={exp.role + exp.company}
-                variants={cardVariants}
-                className={`relative flex gap-8 ${
-                  index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                } items-start`}
+          {EXPERIENCES.map((exp, i) => (
+            <motion.div
+              key={exp.date}
+              initial={{ opacity: 0, x: -40 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: i * 0.15, ease: "easeOut" }}
+              className="relative pl-8 pb-12 last:pb-0"
+            >
+              {/* Dot */}
+              <div
+                className="absolute -left-[5px] top-2 w-3 h-3 rounded-full"
+                style={{ background: "#6366f1", boxShadow: "0 0 20px rgba(99,102,241,0.5)" }}
+              />
+
+              <div className="text-[0.85rem] font-semibold text-[#f472b6] uppercase tracking-wider mb-1">
+                {exp.date}
+              </div>
+              <h3
+                className="text-[1.4rem] font-semibold mb-1"
+                style={{ fontFamily: "Space Grotesk, sans-serif" }}
               >
-                <div
-                  className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border-2 z-10 top-6"
-                  style={{
-                    background: exp.color,
-                    borderColor: exp.color,
-                    boxShadow: `0 0 12px ${exp.color}80`,
-                  }}
-                />
-
-                <div className="hidden md:block flex-1" />
-
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="flex-1 ml-16 md:ml-0 glass rounded-2xl p-6 border border-white/5 hover:border-[#00D4FF]/20 transition-all duration-300"
-                >
-                  <div className="flex flex-wrap gap-3 items-start justify-between mb-4">
-                    <div>
-                      <h3
-                        className="text-xl font-bold"
-                        style={{ color: exp.color }}
-                      >
-                        {exp.role}
-                      </h3>
-                      <p className="text-white/80 font-medium">{exp.company}</p>
-                      <p className="text-white/40 text-sm mt-1">
-                        {exp.location} · {exp.type}
-                      </p>
-                    </div>
-                    <span
-                      className="px-3 py-1 rounded-full text-xs font-medium shrink-0"
-                      style={{
-                        background: `${exp.color}15`,
-                        color: exp.color,
-                        border: `1px solid ${exp.color}30`,
-                      }}
-                    >
-                      {exp.period}
-                    </span>
-                  </div>
-
-                  <ul className="space-y-2">
-                    {exp.highlights.map((h, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-white/60">
-                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: exp.color }} />
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </motion.div>
-            ))}
-          </motion.div>
+                {isEn ? exp.role.en : exp.role.id}
+              </h3>
+              <div className="text-[#818cf8] font-medium mb-4">{exp.company}</div>
+              <ul className="space-y-2">
+                {(isEn ? exp.highlights.en : exp.highlights.id).map((item) => (
+                  <li
+                    key={item}
+                    className="relative pl-5 text-[#94a3b8] text-[0.95rem] leading-[1.7]"
+                  >
+                    <span className="absolute left-0 text-[#818cf8]">▸</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

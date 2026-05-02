@@ -1,19 +1,21 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-inter), sans-serif;
-  --font-serif: var(--font-playfair), serif;
-  --color-electric-blue: #00D4FF;
-  --color-soft-gold: #FFD700;
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
 }
 
 :root {
-  --font-inter: 'Inter', sans-serif;
-  --font-playfair: 'Playfair Display', serif;
-  --color-electric-blue: #00D4FF;
-  --color-soft-gold: #FFD700;
-  --color-bg: #0A0A0F;
-  --color-surface: #111827;
+  --primary: #6366f1;
+  --primary-light: #818cf8;
+  --accent: #f472b6;
+  --accent-warm: #fb923c;
+  --dark: #0f0f1a;
+  --darker: #08080f;
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
 }
 
 * {
@@ -27,42 +29,49 @@ html {
 }
 
 body {
-  background: var(--color-bg);
-  color: white;
-  font-family: var(--font-inter);
+  background: var(--darker);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
 }
 
-/* Glassmorphism */
+@media (min-width: 769px) {
+  body,
+  a,
+  button,
+  [role="button"] {
+    cursor: none;
+  }
+}
+
 .glass {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #0A0A0F;
-}
-::-webkit-scrollbar-thumb {
-  background: #00D4FF;
-  border-radius: 3px;
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--darker); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary-light), var(--accent), var(--accent-warm));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
 }
 
-/* Gradient text */
-.gradient-text-blue {
-  background: linear-gradient(135deg, #00D4FF, #0088FF);
+.gradient-text-primary {
+  background: linear-gradient(135deg, var(--primary-light), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.gradient-text-gold {
-  background: linear-gradient(135deg, #FFD700, #FFA500);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }

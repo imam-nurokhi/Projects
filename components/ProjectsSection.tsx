@@ -1,284 +1,219 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { useLang } from "@/components/LangContext";
 
-const projects = [
+interface Project {
+  initials: string;
+  gradient: string;
+  tags: string[];
+  title: string;
+  desc: { en: string; id: string };
+  link?: string;
+  featured?: boolean;
+}
+
+const PROJECTS: Project[] = [
   {
-    id: 1,
-    title: "Qasir POS Platform",
-    subtitle: "Product Architecture & Full Stack",
-    description:
-      "Architected and led development of Indonesia's leading POS system serving 100K+ merchants. Designed microservices infrastructure with real-time sync capabilities.",
-    tags: ["Architecture", "React", "Node.js", "PostgreSQL", "Docker"],
-    color: "#00D4FF",
-    size: "large",
-    impact: "100K+ merchants served",
-    details: {
-      role: "IT Product Architect & Lead Developer",
-      tech: ["React.js", "Node.js", "PostgreSQL", "Redis", "Docker", "AWS", "RabbitMQ"],
-      challenge:
-        "Design a highly available POS system that works offline-first, syncs in real-time, and scales to 100K+ concurrent users.",
-      solution:
-        "Implemented microservices architecture with event-driven communication, offline-capable PWA frontend, and automated CI/CD pipelines.",
-      outcome: "Reduced downtime by 99%, improved deployment frequency by 5x, onboarded 100K+ merchants.",
+    initials: "RE",
+    gradient: "linear-gradient(135deg, #1e1b4b, #312e81)",
+    tags: ["Next.js", "Node.js", "E-Commerce"],
+    title: "BeliRoyalEnfield.com",
+    desc: {
+      en: "A premium motorcycle e-commerce and dealership platform for Royal Enfield in Indonesia. Features product catalog, dealer locator, financing simulation, and online booking system for test rides and purchases.",
+      id: "Platform e-commerce dan dealer premium untuk Royal Enfield di Indonesia. Dilengkapi katalog produk, pencarian dealer, simulasi pembiayaan, dan sistem pemesanan online untuk test ride dan pembelian.",
+    },
+    link: "https://beliroyalenfield.com",
+  },
+  {
+    initials: "PLN",
+    gradient: "linear-gradient(135deg, #052e16, #14532d)",
+    tags: ["React", "Spring Boot", "Enterprise"],
+    title: "PLN Energi Gas",
+    desc: {
+      en: "Corporate website and business portal for PT PLN Energi Gas, a state-owned gas infrastructure company. Showcases business lines including pipeline distribution, LNG/CNG transportation, fuel retail, and petroleum refining services.",
+      id: "Website korporat dan portal bisnis untuk PT PLN Energi Gas, perusahaan infrastruktur gas BUMN. Menampilkan lini bisnis termasuk distribusi pipa, transportasi LNG/CNG, retail bahan bakar, dan layanan pengolahan minyak bumi.",
+    },
+    link: "https://plnenergigas.co.id",
+  },
+  {
+    initials: "NI",
+    gradient: "linear-gradient(135deg, #1c1917, #292524)",
+    tags: ["Web Development", "CMS", "Corporate"],
+    title: "Netincom.id",
+    desc: {
+      en: "Integrated creative communication consultant platform for PT Net Integra Komunikasi. Specializes in corporate reporting (Annual Reports, Sustainability Reports, Company Profiles), creative design development, multimedia production, and IT development services. The platform serves major corporate clients across Indonesia with tailored communication solutions.",
+      id: "Platform konsultan komunikasi kreatif terintegrasi untuk PT Net Integra Komunikasi. Spesialis dalam pelaporan korporat (Laporan Tahunan, Sustainability Report, Company Profile), pengembangan desain kreatif, produksi multimedia, dan layanan pengembangan IT. Platform ini melayani klien korporat besar di seluruh Indonesia dengan solusi komunikasi yang disesuaikan.",
+    },
+    link: "https://netincom.id",
+    featured: true,
+  },
+  {
+    initials: "CP",
+    gradient: "linear-gradient(135deg, #0c4a6e, #075985)",
+    tags: ["Market Intelligence", "E-Commerce", "Web Crawling"],
+    title: "Compas.co.id",
+    desc: {
+      en: "A market insight platform for automated price tracking and e-commerce intelligence. Built to handle high-traffic loads with optimized SEO visibility. Provides real-time competitive pricing data and market trend analysis for online retailers.",
+      id: "Platform intelijen pasar untuk pelacakan harga otomatis dan analisis data e-commerce. Dibangun untuk menangani trafik tinggi dengan visibilitas SEO yang dioptimalkan. Menyediakan data harga kompetitif real-time dan analisis tren pasar untuk retailer online.",
+    },
+    link: "https://compas.co.id",
+  },
+  {
+    initials: "AQ",
+    gradient: "linear-gradient(135deg, #1e1b4b, #2e1065)",
+    tags: ["ERPNext", "Frappe", "Audit"],
+    title: "Audit-Q",
+    desc: {
+      en: "A centralized audit management system for ISO, ISCC, LVV, and LATIK certifications. Features personnel competency tracking, audit cycle monitoring, and automated QR-validated certificate issuance.",
+      id: "Sistem manajemen audit terpusat untuk sertifikasi ISO, ISCC, LVV, dan LATIK. Fitur mencakup pelacakan kompetensi personel, monitoring siklus audit, dan otomatisasi penerbitan sertifikat tervalidasi QR Code.",
     },
   },
   {
-    id: 2,
-    title: "Odoo ERP Customization",
-    subtitle: "ERP Implementation & Integration",
-    description:
-      "Custom Odoo ERP modules for manufacturing and distribution clients. Automated procurement, inventory, and accounting workflows.",
-    tags: ["Odoo", "Python", "PostgreSQL", "XML-RPC"],
-    color: "#FFD700",
-    size: "medium",
-    impact: "40% efficiency gain",
-    details: {
-      role: "Lead Odoo Developer",
-      tech: ["Python", "Odoo 14/16", "PostgreSQL", "REST API", "QWeb"],
-      challenge:
-        "Manual business processes causing delays and data inconsistency across procurement, warehouse, and finance departments.",
-      solution:
-        "Developed custom Odoo modules automating approval workflows, integrated with external WMS, and built real-time reporting dashboards.",
-      outcome: "40% reduction in manual data entry, 60% faster month-end closing, eliminated cross-department data silos.",
+    initials: "NE",
+    gradient: "linear-gradient(135deg, #14532d, #166534)",
+    tags: ["ERPNext v16", "Frappe HRMS", "ERP"],
+    title: "NexERP",
+    desc: {
+      en: "An enterprise ERP platform built on ERPNext v16, featuring Frappe HRMS v16.5 for comprehensive HR and Payroll automation. Streamlines business processes across departments.",
+      id: "Platform ERP perusahaan berbasis ERPNext v16, mengintegrasikan modul Frappe HRMS v16.5 untuk otomatisasi SDM dan penggajian yang komprehensif. Merampingkan proses bisnis lintas departemen.",
     },
   },
   {
-    id: 3,
-    title: "Enterprise QA Automation Framework",
-    subtitle: "QA Strategy & Test Automation",
-    description:
-      "Built comprehensive automated testing framework for telecom enterprise software at PT. INTI, reducing critical production bugs by 75%.",
-    tags: ["Selenium", "Cypress", "Python", "CI/CD", "Jest"],
-    color: "#00D4FF",
-    size: "medium",
-    impact: "75% bug reduction",
-    details: {
-      role: "Lead QA Engineer",
-      tech: ["Selenium", "Cypress", "Python", "Jest", "Jenkins", "GitLab CI"],
-      challenge:
-        "Manual testing was a bottleneck causing delayed releases and frequent production incidents for government-scale telecom projects.",
-      solution:
-        "Established automated testing pipelines with E2E, integration, and unit test coverage. Introduced BDD with Gherkin for business-readable test specs.",
-      outcome: "75% reduction in critical bugs, 3x faster release cycle, 90% test coverage on core modules.",
-    },
-  },
-  {
-    id: 4,
-    title: "Telkomsigma Web Platform",
-    subtitle: "Full Stack Development",
-    description:
-      "Enterprise internal web platform for Telkomsigma with complex role-based access control, reporting dashboards, and third-party integrations.",
-    tags: ["React", "Node.js", "PostgreSQL", "REST API"],
-    color: "#FFD700",
-    size: "small",
-    impact: "500+ internal users",
-    details: {
-      role: "Full Stack Developer",
-      tech: ["React.js", "Node.js", "PostgreSQL", "Docker", "REST API"],
-      challenge: "Legacy monolithic system causing performance bottlenecks and poor user experience for 500+ internal users.",
-      solution:
-        "Rebuilt with modern React frontend, Node.js APIs, optimized PostgreSQL queries, and containerized deployment.",
-      outcome: "40% performance improvement, modern UX adoption increased productivity, zero deployment downtime.",
+    initials: "OA",
+    gradient: "linear-gradient(135deg, #1e3a5f, #1e40af)",
+    tags: ["React", "Spring Boot", "Data"],
+    title: "OneAlpha & OneDataHub",
+    desc: {
+      en: "A personnel data ecosystem built with React and Spring Boot for real-time qualification reconciliation and staff management across enterprise operations.",
+      id: "Ekosistem pusat data personel yang dibangun dengan React dan Spring Boot untuk rekonsiliasi kualifikasi real-time dan manajemen staf lintas operasional enterprise.",
     },
   },
 ];
 
-function ProjectModal({
-  project,
-  onClose,
-}: {
-  project: (typeof projects)[0];
-  onClose: () => void;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-6"
-      onClick={onClose}
-    >
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0, y: 20 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.9, opacity: 0, y: 20 }}
-        transition={{ type: "spring", stiffness: 300, damping: 25 }}
-        className="relative max-w-2xl w-full glass rounded-3xl p-8 border border-white/10 overflow-y-auto max-h-[85vh]"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center"
-        >
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-
-        <div className="mb-6">
-          <span
-            className="text-xs font-medium px-3 py-1 rounded-full"
-            style={{ background: `${project.color}15`, color: project.color, border: `1px solid ${project.color}30` }}
-          >
-            {project.subtitle}
-          </span>
-          <h3 className="text-2xl font-bold font-serif mt-3 mb-2">{project.title}</h3>
-          <p className="text-white/60">{project.details.role}</p>
-        </div>
-
-        <div className="space-y-5">
-          <div>
-            <h4 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-2">Challenge</h4>
-            <p className="text-white/70 text-sm leading-relaxed">{project.details.challenge}</p>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-2">Solution</h4>
-            <p className="text-white/70 text-sm leading-relaxed">{project.details.solution}</p>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-2">Outcome</h4>
-            <p className="text-white/70 text-sm leading-relaxed">{project.details.outcome}</p>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-3">Tech Stack</h4>
-            <div className="flex flex-wrap gap-2">
-              {project.details.tech.map((t) => (
-                <span
-                  key={t}
-                  className="px-3 py-1 rounded-lg text-xs font-medium bg-white/5 text-white/70 border border-white/10"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-}
-
 export default function ProjectsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.12 },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" as const },
-    },
-  };
+  const { lang } = useLang();
+  const isEn = lang === "en";
 
   return (
-    <section id="projects" className="py-24 px-6 relative" ref={ref}>
-      <div className="max-w-7xl mx-auto">
+    <section
+      id="projects"
+      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-24"
+      style={{ background: "linear-gradient(180deg, transparent, rgba(251,146,60,0.02), transparent)" }}
+      ref={ref}
+    >
+      <div className="max-w-6xl w-full">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-[#00D4FF] text-sm font-medium tracking-widest uppercase mb-4 block">
-            Featured Work
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold font-serif mb-4">
-            Projects &{" "}
-            <span className="gradient-text-gold italic">Case Studies</span>
+          <h2
+            className="text-[clamp(2rem,4vw,3.5rem)] font-bold mb-4"
+            style={{ fontFamily: "Space Grotesk, sans-serif" }}
+          >
+            {isEn ? "Featured Projects" : "Proyek Unggulan"}
           </h2>
-          <p className="text-white/50 max-w-xl mx-auto">
-            From ERP implementations to scalable SaaS platforms — real solutions, real impact.
+          <p className="text-[#94a3b8] text-lg">
+            {isEn
+              ? "A selection of recent work that showcases my expertise"
+              : "Pilihan karya terbaru yang menampilkan keahlian saya"}
           </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {projects.map((project, index) => (
+        {/* Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {PROJECTS.map((project, i) => (
             <motion.div
-              key={project.id}
-              variants={cardVariants}
-              whileHover={{ scale: 1.02, y: -4 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              onClick={() => setSelectedProject(project)}
-              className={`glass rounded-2xl p-6 cursor-pointer border border-white/5 hover:border-[#00D4FF]/30 transition-all duration-300 group relative overflow-hidden ${
-                index === 0 ? "md:col-span-2 lg:col-span-2" : ""
+              key={project.title}
+              initial={{ opacity: 0, y: 60 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: i * 0.1, ease: "easeOut" }}
+              whileHover={{ y: -10, scale: 1.01 }}
+              className={`flex flex-col rounded-3xl overflow-hidden bg-white/[0.03] border border-white/[0.08] backdrop-blur-[10px] transition-all duration-300 hover:border-[rgba(99,102,241,0.3)] hover:shadow-[0_30px_80px_rgba(0,0,0,0.4)] ${
+                project.featured ? "lg:col-span-2 lg:flex-row" : ""
               }`}
             >
+              {/* Image placeholder */}
               <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{
-                  background: `radial-gradient(circle at top right, ${project.color}08, transparent 60%)`,
-                }}
-              />
+                className={`relative flex items-center justify-center overflow-hidden ${
+                  project.featured ? "lg:w-[45%] min-h-[220px]" : "h-[180px] sm:h-[200px]"
+                }`}
+                style={{ background: project.gradient }}
+              >
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: "linear-gradient(to top, rgba(8,8,15,0.9), transparent)",
+                  }}
+                />
+                <span
+                  className="relative z-10 text-white/10 font-bold"
+                  style={{
+                    fontFamily: "Space Grotesk, sans-serif",
+                    fontSize: "clamp(2rem,5vw,3rem)",
+                  }}
+                >
+                  {project.initials}
+                </span>
+              </div>
 
-              <div className="relative z-10">
-                <div className="flex items-start justify-between mb-4">
-                  <span
-                    className="text-xs font-medium px-3 py-1 rounded-full"
-                    style={{
-                      background: `${project.color}15`,
-                      color: project.color,
-                      border: `1px solid ${project.color}30`,
-                    }}
-                  >
-                    {project.subtitle}
-                  </span>
-                  <span className="text-xs text-white/30 font-medium">{project.impact}</span>
-                </div>
-
-                <h3 className="text-xl font-bold mb-2 group-hover:text-[#00D4FF] transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-5">{project.description}</p>
-
-                <div className="flex flex-wrap gap-2">
+              {/* Info */}
+              <div
+                className={`flex flex-col justify-center p-7 ${project.featured ? "lg:w-[55%]" : ""}`}
+              >
+                <div className="flex flex-wrap gap-2 mb-3">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-1 rounded-md text-xs bg-white/5 text-white/40 border border-white/5"
+                      className="px-3 py-1 rounded-full text-xs font-medium text-[#818cf8]"
+                      style={{
+                        background: "rgba(99,102,241,0.1)",
+                        border: "1px solid rgba(99,102,241,0.2)",
+                      }}
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <div className="mt-5 flex items-center gap-2 text-xs text-white/30 group-hover:text-[#00D4FF] transition-colors">
-                  <span>View Case Study</span>
-                  <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
+                <h3
+                  className="text-xl font-semibold mb-2"
+                  style={{ fontFamily: "Space Grotesk, sans-serif" }}
+                >
+                  {project.title}
+                </h3>
+                <p className="text-[#94a3b8] text-sm leading-[1.6] mb-5">
+                  {isEn ? project.desc.en : project.desc.id}
+                </p>
+
+                {project.link ? (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-[#818cf8] font-semibold text-sm hover:gap-4 transition-all duration-300"
+                  >
+                    {isEn ? "Visit Website" : "Kunjungi Website"}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                ) : (
+                  <span className="text-[#94a3b8] text-sm">
+                    {isEn ? "Internal Project" : "Proyek Internal"}
+                  </span>
+                )}
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
-
-      <AnimatePresence>
-        {selectedProject && (
-          <ProjectModal
-            project={selectedProject}
-            onClose={() => setSelectedProject(null)}
-          />
-        )}
-      </AnimatePresence>
     </section>
   );
 }
