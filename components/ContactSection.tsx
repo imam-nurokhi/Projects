@@ -82,7 +82,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-24"
+      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-12 md:py-24"
       style={{ background: "linear-gradient(180deg, transparent, rgba(99,102,241,0.03), transparent)" }}
       ref={ref}
     >
@@ -112,7 +112,7 @@ export default function ContactSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
           onSubmit={handleSubmit(onSubmit)}
-          className="glass rounded-[32px] p-10 text-left space-y-6"
+          className="glass rounded-[32px] p-6 md:p-10 text-left space-y-6"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>

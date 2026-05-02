@@ -101,7 +101,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-24"
+      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-12 md:py-24"
       style={{ background: "linear-gradient(180deg, transparent, rgba(251,146,60,0.02), transparent)" }}
       ref={ref}
     >

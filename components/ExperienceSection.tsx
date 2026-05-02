@@ -90,7 +90,7 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-24"
+      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-12 md:py-24"
       style={{ background: "linear-gradient(180deg, transparent, rgba(244,114,182,0.02), transparent)" }}
       ref={ref}
     >

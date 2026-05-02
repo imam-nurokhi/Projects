@@ -46,7 +46,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 py-24 text-center z-[1]"
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 py-12 md:py-24 text-center z-[1]"
     >
       {/* Floating shapes */}
       <FloatingShape size={400} color="#6366f1" style={{ top: "10%", left: "-10%" }} delay={0} />
@@ -98,7 +98,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.0, ease: "easeOut" }}
-          className="flex flex-wrap justify-center gap-4 mb-10 text-[0.85rem] text-[#94a3b8]"
+          className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-10 text-[0.7rem] md:text-[0.85rem] text-[#94a3b8]"
         >
           <span className="flex items-center gap-1">📍 South Jakarta, Indonesia</span>
           <span className="flex items-center gap-1">📞 +62 819-5331-9918</span>
@@ -114,7 +114,7 @@ export default function HeroSection() {
         >
           <a
             href="#projects"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 px-6 md:px-8 py-2.5 md:py-3.5 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5"
             style={{
               background: "linear-gradient(135deg, #6366f1, #f472b6)",
               boxShadow: "0 10px 40px rgba(99,102,241,0.3)",
@@ -127,7 +127,7 @@ export default function HeroSection() {
           </a>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-semibold text-[#e2e8f0] bg-white/[0.03] border border-white/[0.08] backdrop-blur-[10px] transition-all duration-300 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 px-6 md:px-8 py-2.5 md:py-3.5 rounded-full text-sm font-semibold text-[#e2e8f0] bg-white/[0.03] border border-white/[0.08] backdrop-blur-[10px] transition-all duration-300 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-0.5"
           >
             {isEn ? "Get In Touch" : "Hubungi Saya"}
           </a>

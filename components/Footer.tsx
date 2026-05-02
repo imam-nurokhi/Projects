@@ -8,7 +8,7 @@ export default function Footer() {
   const isEn = lang === "en";
 
   return (
-    <footer className="relative z-[1] text-center px-6 py-10 border-t border-white/[0.08] text-[#94a3b8] text-sm">
+    <footer className="relative z-[1] text-center px-6 py-8 md:py-10 border-t border-white/[0.08] text-[#94a3b8] text-sm">
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

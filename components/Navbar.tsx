@@ -44,8 +44,8 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between transition-all duration-300 ${
           scrolled
-            ? "px-12 py-3 border-b border-white/10 bg-[rgba(8,8,15,0.9)] backdrop-blur-[20px]"
-            : "px-12 py-5 bg-[rgba(8,8,15,0.6)] backdrop-blur-[20px] border-b border-white/[0.08]"
+            ? "px-6 md:px-12 py-3 border-b border-white/10 bg-[rgba(8,8,15,0.9)] backdrop-blur-[20px]"
+            : "px-6 md:px-12 py-5 bg-[rgba(8,8,15,0.6)] backdrop-blur-[20px] border-b border-white/[0.08]"
         }`}
       >
         <a
