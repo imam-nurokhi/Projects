@@ -1,218 +1,159 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useLang } from "@/components/LangContext";
 
-const roles = [
-  "IT Product Architect",
-  "React & Node.js Developer",
-  "ERP (Odoo) Specialist",
-  "UI/UX Enthusiast",
-];
-
-function TypingText() {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [displayed, setDisplayed] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const current = roles[roleIndex];
-    let timeout: ReturnType<typeof setTimeout>;
-
-    if (!isDeleting && displayed.length < current.length) {
-      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 80);
-    } else if (!isDeleting && displayed.length === current.length) {
-      timeout = setTimeout(() => setIsDeleting(true), 1800);
-    } else if (isDeleting && displayed.length > 0) {
-      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), 45);
-    } else if (isDeleting && displayed.length === 0) {
-      setIsDeleting(false);
-      setRoleIndex((prev) => (prev + 1) % roles.length);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayed, isDeleting, roleIndex]);
-
+function FloatingShape({
+  size,
+  color,
+  style,
+  delay,
+}: {
+  size: number;
+  color: string;
+  style: React.CSSProperties;
+  delay: number;
+}) {
   return (
-    <span className="gradient-text-blue font-serif italic">
-      {displayed}
-      <span className="animate-pulse ml-0.5 inline-block w-0.5 h-8 bg-[#00D4FF] align-middle" />
-    </span>
-  );
-}
-
-function GridBackground() {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <svg className="absolute inset-0 w-full h-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#00D4FF" strokeWidth="0.5" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#grid)" />
-      </svg>
-
-      <motion.div
-        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full"
-        style={{
-          background: "radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%)",
-        }}
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.5, 0.8, 0.5],
-        }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full"
-        style={{
-          background: "radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 70%)",
-        }}
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.4, 0.7, 0.4],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {[...Array(8)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1.5 h-1.5 rounded-full bg-[#00D4FF]"
-          style={{
-            left: `${10 + i * 12}%`,
-            top: `${20 + (i % 3) * 25}%`,
-            opacity: 0.4,
-          }}
-          animate={{
-            y: [0, -20, 0],
-            opacity: [0.3, 0.7, 0.3],
-          }}
-          transition={{
-            duration: 3 + i * 0.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: i * 0.4,
-          }}
-        />
-      ))}
-    </div>
+    <motion.div
+      className="absolute rounded-full pointer-events-none z-0"
+      style={{
+        width: size,
+        height: size,
+        background: color,
+        filter: "blur(80px)",
+        opacity: 0.12,
+        ...style,
+      }}
+      animate={{
+        x: [0, 30, -20, 0],
+        y: [0, -30, 20, 0],
+      }}
+      transition={{
+        duration: 8 + delay * 2,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay,
+      }}
+    />
   );
 }
 
 export default function HeroSection() {
+  const { lang } = useLang();
+  const isEn = lang === "en";
+
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-20"
-      style={{ background: "linear-gradient(135deg, #0A0A0F 0%, #0D1117 50%, #0A0F1E 100%)" }}
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 py-24 text-center z-[1]"
     >
-      <GridBackground />
+      {/* Floating shapes */}
+      <FloatingShape size={400} color="#6366f1" style={{ top: "10%", left: "-10%" }} delay={0} />
+      <FloatingShape size={300} color="#f472b6" style={{ bottom: "20%", right: "-5%" }} delay={1} />
+      <FloatingShape size={250} color="#fb923c" style={{ top: "50%", left: "50%" }} delay={2} />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+      <div className="relative z-[2]">
+        {/* Badge */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-[#00D4FF]/30 mb-8"
-        >
-          <span className="w-2 h-2 rounded-full bg-[#00D4FF] animate-pulse" />
-          <span className="text-sm text-[#00D4FF] font-medium">Available for new opportunities</span>
-        </motion.div>
-
-        <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="text-5xl md:text-7xl font-bold font-serif mb-4 leading-tight"
+          transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+          className="inline-flex items-center gap-2 px-5 py-2 mb-8 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-[10px] text-[#94a3b8] text-sm"
         >
-          Muhammad{" "}
-          <span className="gradient-text-gold italic">Imam</span>
+          <span
+            className="w-2 h-2 rounded-full bg-green-400"
+            style={{ animation: "pulse 2s infinite" }}
+          />
+          {isEn ? "Available for new opportunities" : "Tersedia untuk kesempatan baru"}
+        </motion.div>
+
+        {/* Name */}
+        <motion.h1
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
+          className="text-[clamp(2.2rem,7vw,5.5rem)] font-bold leading-[1.05] tracking-[-0.03em] mb-6"
+          style={{ fontFamily: "Space Grotesk, sans-serif" }}
+        >
+          Muhammad Imam
           <br />
-          <span className="text-white/90">Nurokhi</span>
+          <span className="gradient-text">Nurokhi</span>
         </motion.h1>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-2xl md:text-3xl h-12 flex items-center justify-center mb-8"
-        >
-          <TypingText />
-        </motion.div>
-
+        {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
+          transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+          className="text-[clamp(0.95rem,1.8vw,1.25rem)] text-[#94a3b8] max-w-[650px] mx-auto mb-8 leading-[1.7] font-light"
         >
-          Bridging complex system architecture with exceptional user experience.
-          I craft scalable digital solutions — from ERP implementation to full-stack
-          web applications — that drive real business impact.
+          {isEn
+            ? "Senior Software Developer, Full-Stack Engineer & Tech Lead with 11+ years of experience delivering high-impact digital solutions across e-Commerce, Auditing, and ERP sectors."
+            : "Senior Software Developer, Full-Stack Engineer & Tech Lead dengan pengalaman lebih dari 11 tahun menghadirkan solusi digital berskala besar di sektor e-Commerce, Audit, dan ERP."}
         </motion.p>
 
+        {/* Info row */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          transition={{ duration: 1, delay: 1.0, ease: "easeOut" }}
+          className="flex flex-wrap justify-center gap-4 mb-10 text-[0.85rem] text-[#94a3b8]"
         >
-          <motion.a
-            href="#experience"
-            className="group relative px-8 py-4 rounded-xl bg-[#00D4FF] text-black font-semibold text-lg overflow-hidden"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className="relative z-10">View My Work</span>
-            <motion.div
-              className="absolute inset-0 bg-white/20"
-              initial={{ scale: 0, opacity: 0 }}
-              whileHover={{ scale: 1.5, opacity: 1 }}
-              transition={{ duration: 0.4 }}
-            />
-          </motion.a>
-
-          <motion.a
-            href="#contact"
-            className="px-8 py-4 rounded-xl border border-[#FFD700]/50 text-[#FFD700] font-semibold text-lg hover:bg-[#FFD700]/10 transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Let&apos;s Connect
-          </motion.a>
+          <span className="flex items-center gap-1">📍 South Jakarta, Indonesia</span>
+          <span className="flex items-center gap-1">📞 +62 819-5331-9918</span>
+          <span className="flex items-center gap-1">✉️ mimamnuro@gmail.com</span>
         </motion.div>
 
+        {/* Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 1.1 }}
-          className="mt-20 grid grid-cols-3 gap-6 max-w-xl mx-auto"
+          transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
+          className="flex flex-wrap gap-4 justify-center"
         >
-          {[
-            { value: "5+", label: "Years Experience" },
-            { value: "20+", label: "Projects Delivered" },
-            { value: "3+", label: "Companies Led" },
-          ].map((stat) => (
-            <div key={stat.label} className="glass rounded-2xl p-4 text-center">
-              <div className="text-2xl font-bold gradient-text-blue font-serif">{stat.value}</div>
-              <div className="text-xs text-white/50 mt-1">{stat.label}</div>
-            </div>
-          ))}
+          <a
+            href="#projects"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5"
+            style={{
+              background: "linear-gradient(135deg, #6366f1, #f472b6)",
+              boxShadow: "0 10px 40px rgba(99,102,241,0.3)",
+            }}
+          >
+            {isEn ? "View My Work" : "Lihat Proyek"}
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-semibold text-[#e2e8f0] bg-white/[0.03] border border-white/[0.08] backdrop-blur-[10px] transition-all duration-300 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-0.5"
+          >
+            {isEn ? "Get In Touch" : "Hubungi Saya"}
+          </a>
         </motion.div>
       </div>
 
+      {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#94a3b8] text-[0.8rem] uppercase tracking-widest"
+        style={{ animation: "bounce 2s infinite" }}
       >
-        <span className="text-xs text-white/30">Scroll to explore</span>
-        <svg className="w-4 h-6 text-[#00D4FF] opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
+        <span>{isEn ? "Scroll" : "Gulir"}</span>
+        <div className="w-px h-10 bg-gradient-to-b from-[#818cf8] to-transparent" />
       </motion.div>
+
+      <style>{`
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+        @keyframes bounce {
+          0%,20%,50%,80%,100%{transform:translateX(-50%) translateY(0)}
+          40%{transform:translateX(-50%) translateY(-10px)}
+          60%{transform:translateX(-50%) translateY(-5px)}
+        }
+      `}</style>
     </section>
   );
 }
