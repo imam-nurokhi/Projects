@@ -90,7 +90,7 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-24"
+      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-12 md:py-24"
       style={{ background: "linear-gradient(180deg, transparent, rgba(244,114,182,0.02), transparent)" }}
       ref={ref}
     >
@@ -100,7 +100,7 @@ export default function ExperienceSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8 md:mb-16"
         >
           <h2
             className="text-[clamp(2rem,4vw,3.5rem)] font-bold mb-4"

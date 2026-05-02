@@ -70,7 +70,7 @@ export default function SkillsSection() {
   return (
     <section
       id="skills"
-      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-24"
+      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-12 md:py-24"
       style={{ background: "linear-gradient(180deg, transparent, rgba(244,114,182,0.02), transparent)" }}
       ref={ref}
     >
@@ -80,7 +80,7 @@ export default function SkillsSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-8 md:mb-16"
         >
           <h2
             className="text-[clamp(2rem,4vw,3.5rem)] font-bold mb-4"
@@ -104,7 +104,7 @@ export default function SkillsSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: i * 0.08, ease: "easeOut" }}
               whileHover={{ y: -8, borderColor: "rgba(99,102,241,0.2)" }}
-              className="relative group text-left rounded-3xl p-8 bg-white/[0.03] border border-white/[0.08] backdrop-blur-[10px] transition-all duration-300 overflow-hidden"
+              className="relative group text-left rounded-3xl p-6 md:p-8 bg-white/[0.03] border border-white/[0.08] backdrop-blur-[10px] transition-all duration-300 overflow-hidden"
             >
               {/* Top accent bar */}
               <div

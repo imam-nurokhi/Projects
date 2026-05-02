@@ -43,7 +43,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-24"
+      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-12 md:py-24"
       style={{ background: "linear-gradient(180deg, transparent, rgba(99,102,241,0.03), transparent)" }}
       ref={ref}
     >

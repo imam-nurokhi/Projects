@@ -101,7 +101,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-24"
+      className="relative z-[1] min-h-screen flex items-center justify-center px-6 py-12 md:py-24"
       style={{ background: "linear-gradient(180deg, transparent, rgba(251,146,60,0.02), transparent)" }}
       ref={ref}
     >
@@ -111,7 +111,7 @@ export default function ProjectsSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8 md:mb-16"
         >
           <h2
             className="text-[clamp(2rem,4vw,3.5rem)] font-bold mb-4"
@@ -127,7 +127,7 @@ export default function ProjectsSection() {
         </motion.div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
           {PROJECTS.map((project, i) => (
             <motion.div
               key={project.title}
@@ -165,7 +165,7 @@ export default function ProjectsSection() {
 
               {/* Info */}
               <div
-                className={`flex flex-col justify-center p-7 ${project.featured ? "lg:w-[55%]" : ""}`}
+                className={`flex flex-col justify-center p-5 md:p-7 ${project.featured ? "lg:w-[55%]" : ""}`}
               >
                 <div className="flex flex-wrap gap-2 mb-3">
                   {project.tags.map((tag) => (
