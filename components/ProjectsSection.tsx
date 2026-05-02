@@ -165,7 +165,7 @@ export default function ProjectsSection() {
 
               {/* Info */}
               <div
-                className={`flex flex-col justify-center p-7 ${project.featured ? "lg:w-[55%]" : ""}`}
+                className={`flex flex-col justify-center p-5 md:p-7 ${project.featured ? "lg:w-[55%]" : ""}`}
               >
                 <div className="flex flex-wrap gap-2 mb-3">
                   {project.tags.map((tag) => (

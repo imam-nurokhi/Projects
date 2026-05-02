@@ -104,7 +104,7 @@ export default function SkillsSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: i * 0.08, ease: "easeOut" }}
               whileHover={{ y: -8, borderColor: "rgba(99,102,241,0.2)" }}
-              className="relative group text-left rounded-3xl p-8 bg-white/[0.03] border border-white/[0.08] backdrop-blur-[10px] transition-all duration-300 overflow-hidden"
+              className="relative group text-left rounded-3xl p-6 md:p-8 bg-white/[0.03] border border-white/[0.08] backdrop-blur-[10px] transition-all duration-300 overflow-hidden"
             >
               {/* Top accent bar */}
               <div
