@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Imam Nurokhi — CV (ATS)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #111;
+    background: #fff;
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 18mm 18mm 18mm 18mm;
+  }
+  /* ---- Header ---- */
+  .header { margin-bottom: 10px; }
+  .name { font-size: 22pt; font-weight: 700; letter-spacing: -0.5px; }
+  .title { font-size: 12pt; color: #333; margin-top: 3px; }
+  .contact {
+    margin-top: 6px;
+    font-size: 10pt;
+    color: #333;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+  }
+  .contact span::before { content: ""; }
+  /* ---- Section ---- */
+  .section { margin-top: 14px; }
+  .section-title {
+    font-size: 11pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1.5px solid #111;
+    padding-bottom: 2px;
+    margin-bottom: 8px;
+  }
+  /* ---- Experience ---- */
+  .job { margin-bottom: 12px; }
+  .job-header { display: flex; justify-content: space-between; align-items: baseline; }
+  .job-title { font-weight: 700; font-size: 11pt; }
+  .job-date { font-size: 10pt; color: #444; white-space: nowrap; }
+  .job-company { font-size: 10.5pt; color: #222; margin-bottom: 4px; }
+  .job ul { padding-left: 16px; }
+  .job li { margin-bottom: 2px; font-size: 10.5pt; }
+  /* ---- Skills ---- */
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px; }
+  .skill-row { font-size: 10.5pt; }
+  .skill-label { font-weight: 700; }
+  /* ---- Projects ---- */
+  .project { margin-bottom: 8px; }
+  .project-title { font-weight: 700; font-size: 10.5pt; }
+  .project-tech { font-size: 10pt; color: #444; }
+  .project-desc { font-size: 10.5pt; }
+  /* ---- Print ---- */
+  @media print {
+    body { padding: 14mm 16mm; }
+    @page { size: A4; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="name">Muhammad Imam Nurokhi</div>
+  <div class="title">Senior Software Developer | Full-Stack Engineer | Tech Lead</div>
+  <div class="contact">
+    <span>South Jakarta, Indonesia</span>
+    <span>+62 819-5331-9918</span>
+    <span>mimamnuro@gmail.com</span>
+    <span>linkedin.com/in/muhammad-imam-nurokhi</span>
+    <span>github.com/imam-nurokhi</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Professional Summary</div>
+  <p style="font-size:10.5pt;">
+    Results-driven Senior Software Developer and Tech Lead with 11+ years of experience architecting and
+    delivering high-impact digital solutions across e-Commerce, Auditing, and ERP sectors. Proven expertise
+    in full-stack development, system automation, and scalable microservices architecture using Go, Node.js,
+    Python, Java, and PHP. Demonstrated success in leading cross-functional engineering teams, bridging
+    business requirements with technical execution, and maintaining high standards of code quality and
+    system integrity.
+  </p>
+</div>
+
+<div class="section">
+  <div class="section-title">Work Experience</div>
+
+  <div class="job">
+    <div class="job-header">
+      <span class="job-title">Tech Lead</span>
+      <span class="job-date">Dec 2025 – Present</span>
+    </div>
+    <div class="job-company">Nexora (Part of CBQA Global Group) — Jakarta, Indonesia</div>
+    <ul>
+      <li>Spearhead end-to-end development of internal and external enterprise platforms including Audit-Q, NexERP, OneAlpha, OneDataHub, and Odoo ERP</li>
+      <li>Direct technical strategy, define architecture standards, and mentor a cross-functional engineering team</li>
+      <li>Ensure system integrity, data security, and product scalability across all managed platforms</li>
+      <li>Collaborate directly with stakeholders to translate business requirements into technical roadmaps</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <span class="job-title">Senior IT Programmer</span>
+      <span class="job-date">Feb 2024 – Nov 2025</span>
+    </div>
+    <div class="job-company">CBQA Global — Jakarta, Indonesia</div>
+    <ul>
+      <li>Led debugging, optimization, and feature development for mission-critical internal applications</li>
+      <li>Engineered robust backend systems using Java Spring Boot and PostgreSQL</li>
+      <li>Integrated complex third-party APIs and external data services into existing platforms</li>
+      <li>Delivered strategic technical progress reports to key stakeholders and management</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <span class="job-title">Full-Stack Engineer</span>
+      <span class="job-date">Nov 2022 – Feb 2024</span>
+    </div>
+    <div class="job-company">Privat Talenta Indonesia — Jakarta, Indonesia</div>
+    <ul>
+      <li>Architected and deployed core website systems and a full CMS platform from the ground up</li>
+      <li>Developed hybrid mobile applications for Android and iOS using Ionic Framework and TypeScript</li>
+      <li>Enhanced platform reach, user engagement, and overall product performance</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <span class="job-title">Product Development Team Lead &amp; Engineer</span>
+      <span class="job-date">Dec 2015 – Feb 2021</span>
+    </div>
+    <div class="job-company">Telunjuk.com — Jakarta, Indonesia</div>
+    <ul>
+      <li>Led development of "Compas" — a market intelligence platform for automated e-commerce price tracking and competitive analysis</li>
+      <li>Optimized platform performance to sustain high-traffic loads and improve system reliability</li>
+      <li>Improved core CMS SEO visibility resulting in significant organic traffic growth</li>
+      <li>Delivered end-to-end e-commerce intelligence solutions adopted by major retail brands</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Technical Skills</div>
+  <div class="skills-grid">
+    <div class="skill-row"><span class="skill-label">Backend:</span> Go (Gin/GORM), Node.js, Python, Java (Spring Boot), PHP (Laravel)</div>
+    <div class="skill-row"><span class="skill-label">Frontend:</span> React, Next.js, TypeScript, Ionic Framework</div>
+    <div class="skill-row"><span class="skill-label">Database:</span> PostgreSQL, MySQL, Elasticsearch</div>
+    <div class="skill-row"><span class="skill-label">DevOps:</span> Docker, Nginx, Traefik, CI/CD Pipelines</div>
+    <div class="skill-row"><span class="skill-label">ERP/Enterprise:</span> ERPNext, Frappe Framework, Odoo 18, Prisma ORM</div>
+    <div class="skill-row"><span class="skill-label">Architecture:</span> Microservices, REST API, System Design</div>
+    <div class="skill-row"><span class="skill-label">Methodologies:</span> Agile, Scrum, Web Crawling, SEO Optimization</div>
+    <div class="skill-row"><span class="skill-label">Networking:</span> Mikrotik, Linux Server Administration</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Key Projects</div>
+
+  <div class="project">
+    <div class="job-header">
+      <span class="project-title">BeliRoyalEnfield.com — E-Commerce Platform</span>
+      <span class="job-date">beliroyalenfield.com</span>
+    </div>
+    <div class="project-tech">Next.js, Node.js, E-Commerce</div>
+    <div class="project-desc">Premium motorcycle e-commerce and dealership platform for Royal Enfield Indonesia. Features product catalog, dealer locator, financing simulation, and test-ride booking system.</div>
+  </div>
+
+  <div class="project">
+    <div class="job-header">
+      <span class="project-title">PLN Energi Gas — Corporate Portal</span>
+      <span class="job-date">plnenergigas.co.id</span>
+    </div>
+    <div class="project-tech">React, Java Spring Boot, Enterprise</div>
+    <div class="project-desc">Corporate website and business portal for PT PLN Energi Gas (state-owned gas infrastructure company). Showcases pipeline distribution, LNG/CNG, fuel retail, and petroleum refining services.</div>
+  </div>
+
+  <div class="project">
+    <div class="job-header">
+      <span class="project-title">Audit-Q — Centralized Audit Management System</span>
+      <span class="job-date">Internal</span>
+    </div>
+    <div class="project-tech">ERPNext, Frappe Framework, Python</div>
+    <div class="project-desc">Audit management system for ISO, ISCC, LVV, and LATIK certifications with personnel competency tracking and QR-validated automated certificate issuance.</div>
+  </div>
+
+  <div class="project">
+    <div class="job-header">
+      <span class="project-title">Compas.co.id — Market Intelligence Platform</span>
+      <span class="job-date">compas.co.id</span>
+    </div>
+    <div class="project-tech">Web Crawling, Python, Node.js, SEO</div>
+    <div class="project-desc">Automated price tracking and e-commerce intelligence platform handling high-traffic loads with real-time competitive pricing data and market trend analysis for online retailers.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Languages</div>
+  <div class="skills-grid">
+    <div class="skill-row"><span class="skill-label">Indonesian:</span> Native</div>
+    <div class="skill-row"><span class="skill-label">English:</span> Professional Working Proficiency</div>
+  </div>
+</div>
+
+</body>
+</html>

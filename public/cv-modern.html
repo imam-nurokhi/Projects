@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Imam Nurokhi — CV (Modern)</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #6366f1;
+    --accent: #f472b6;
+    --warm: #fb923c;
+    --dark: #0f172a;
+    --mid: #334155;
+    --muted: #64748b;
+    --light: #f1f5f9;
+    --white: #ffffff;
+    --sidebar-bg: #0f172a;
+    --sidebar-w: 72mm;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 9.5pt;
+    color: var(--dark);
+    background: #fff;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ============ LAYOUT ============ */
+  .page {
+    display: flex;
+    flex-direction: row;
+    min-height: 297mm;
+  }
+
+  /* ============ SIDEBAR ============ */
+  .sidebar {
+    width: var(--sidebar-w);
+    min-width: var(--sidebar-w);
+    background: var(--sidebar-bg);
+    color: #cbd5e1;
+    padding: 10mm 7mm 10mm 7mm;
+    display: flex;
+    flex-direction: column;
+    gap: 7mm;
+  }
+
+  /* Profile */
+  .profile-initials {
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20pt;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+    flex-shrink: 0;
+  }
+
+  /* Sidebar section */
+  .s-section { }
+  .s-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 7pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+    border-bottom: 1px solid rgba(99,102,241,0.3);
+    padding-bottom: 3px;
+    margin-bottom: 6px;
+  }
+
+  /* Contact */
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 5px;
+    font-size: 8.5pt;
+    line-height: 1.4;
+    color: #94a3b8;
+  }
+  .contact-item .icon {
+    color: var(--primary);
+    font-size: 9pt;
+    margin-top: 1px;
+    flex-shrink: 0;
+    width: 13px;
+  }
+  .contact-item a { color: #94a3b8; text-decoration: none; }
+
+  /* Skills */
+  .skill-group { margin-bottom: 6px; }
+  .skill-cat {
+    font-size: 8pt;
+    font-weight: 600;
+    color: #e2e8f0;
+    margin-bottom: 3px;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 3px; }
+  .skill-tag {
+    padding: 2px 6px;
+    background: rgba(99,102,241,0.15);
+    border: 1px solid rgba(99,102,241,0.25);
+    border-radius: 100px;
+    font-size: 7.5pt;
+    color: #a5b4fc;
+  }
+
+  /* Language */
+  .lang-item { margin-bottom: 5px; }
+  .lang-name { font-size: 8.5pt; color: #e2e8f0; font-weight: 500; }
+  .lang-level { font-size: 7.5pt; color: #64748b; }
+  .lang-bar { height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 3px; }
+  .lang-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+
+  /* ============ MAIN ============ */
+  .main {
+    flex: 1;
+    padding: 10mm 9mm 10mm 9mm;
+    display: flex;
+    flex-direction: column;
+    gap: 6mm;
+  }
+
+  /* Name block */
+  .name-block { border-bottom: 2px solid var(--light); padding-bottom: 5mm; }
+  .name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22pt;
+    font-weight: 700;
+    color: var(--dark);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .name span {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .job-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10.5pt;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 3px;
+  }
+
+  /* Main section */
+  .m-section { }
+  .m-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 9pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 5px;
+  }
+  .m-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+    opacity: 0.4;
+  }
+
+  /* Summary */
+  .summary {
+    font-size: 9.5pt;
+    color: var(--mid);
+    line-height: 1.65;
+  }
+
+  /* Experience */
+  .exp-item { margin-bottom: 7px; page-break-inside: avoid; }
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1px;
+  }
+  .exp-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10pt;
+    font-weight: 700;
+    color: var(--dark);
+  }
+  .exp-date {
+    font-size: 8pt;
+    color: var(--accent);
+    font-weight: 600;
+    white-space: nowrap;
+    margin-left: 8px;
+    padding: 1px 6px;
+    background: rgba(244,114,182,0.1);
+    border-radius: 4px;
+  }
+  .exp-company {
+    font-size: 9pt;
+    color: var(--primary);
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+  .exp-list { padding-left: 12px; }
+  .exp-list li {
+    font-size: 9pt;
+    color: var(--mid);
+    margin-bottom: 2px;
+    line-height: 1.5;
+  }
+  .exp-list li::marker { color: var(--primary); }
+
+  /* Projects grid */
+  .proj-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+  }
+  .proj-card {
+    border: 1px solid var(--light);
+    border-radius: 6px;
+    padding: 6px 8px;
+    border-left: 3px solid var(--primary);
+    page-break-inside: avoid;
+  }
+  .proj-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 9pt;
+    color: var(--dark);
+  }
+  .proj-tech {
+    font-size: 7.5pt;
+    color: var(--primary);
+    margin: 2px 0;
+  }
+  .proj-desc { font-size: 8pt; color: var(--muted); line-height: 1.4; }
+  .proj-link { font-size: 7.5pt; color: var(--accent); margin-top: 2px; display: block; }
+
+  /* ============ PRINT ============ */
+  @media print {
+    body { margin: 0; }
+    @page { size: A4; margin: 0; }
+    .page { min-height: 297mm; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ====== SIDEBAR ====== -->
+  <aside class="sidebar">
+
+    <div class="profile-initials">MI</div>
+
+    <div class="s-section">
+      <div class="s-title">Contact</div>
+      <div class="contact-item">
+        <span class="icon">📍</span>
+        <span>South Jakarta, Indonesia</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">📞</span>
+        <span>+62 819-5331-9918</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">✉️</span>
+        <span>mimamnuro@gmail.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">💼</span>
+        <a href="https://linkedin.com/in/muhammad-imam-nurokhi">linkedin.com/in/muhammad-imam-nurokhi</a>
+      </div>
+      <div class="contact-item">
+        <span class="icon">🐙</span>
+        <a href="https://github.com/imam-nurokhi">github.com/imam-nurokhi</a>
+      </div>
+    </div>
+
+    <div class="s-section">
+      <div class="s-title">Technical Skills</div>
+
+      <div class="skill-group">
+        <div class="skill-cat">Backend</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Go (Gin/GORM)</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Spring Boot</span>
+          <span class="skill-tag">PHP Laravel</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-cat">Frontend</div>
+        <div class="skill-tags">
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Next.js</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">Ionic</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-cat">Database &amp; DevOps</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">Elasticsearch</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Nginx</span>
+          <span class="skill-tag">Traefik</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-cat">ERP &amp; Enterprise</div>
+        <div class="skill-tags">
+          <span class="skill-tag">ERPNext</span>
+          <span class="skill-tag">Frappe</span>
+          <span class="skill-tag">Odoo 18</span>
+          <span class="skill-tag">Prisma ORM</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-cat">Architecture &amp; Methods</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Microservices</span>
+          <span class="skill-tag">REST API</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">Agile/Scrum</span>
+          <span class="skill-tag">Web Crawling</span>
+          <span class="skill-tag">SEO</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="s-section">
+      <div class="s-title">Languages</div>
+      <div class="lang-item">
+        <div class="lang-name">Indonesian</div>
+        <div class="lang-level">Native</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+      </div>
+      <div class="lang-item">
+        <div class="lang-name">English</div>
+        <div class="lang-level">Professional Working</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:75%"></div></div>
+      </div>
+    </div>
+
+    <div class="s-section">
+      <div class="s-title">Highlights</div>
+      <div style="font-size:8pt; color:#94a3b8; line-height:1.6;">
+        ✦ 11+ years industry experience<br>
+        ✦ Led 50+ projects delivered<br>
+        ✦ 4 companies across sectors<br>
+        ✦ e-Commerce · ERP · Audit<br>
+        ✦ Open to new opportunities
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ====== MAIN ====== -->
+  <main class="main">
+
+    <div class="name-block">
+      <div class="name">Muhammad Imam <span>Nurokhi</span></div>
+      <div class="job-title">Senior Software Developer · Full-Stack Engineer · Tech Lead</div>
+    </div>
+
+    <div class="m-section">
+      <div class="m-title">Professional Summary</div>
+      <p class="summary">
+        Results-driven Tech Lead and Full-Stack Engineer with <strong>11+ years</strong> of experience
+        delivering enterprise-grade digital solutions across e-Commerce, Auditing, and ERP sectors.
+        Specializes in scalable microservices architecture, system automation, and cross-functional
+        team leadership. Track record of bridging business requirements with technical excellence
+        using Go, Node.js, Python, and Java — from product inception to production.
+      </p>
+    </div>
+
+    <div class="m-section">
+      <div class="m-title">Work Experience</div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-title">Tech Lead</span>
+          <span class="exp-date">Dec 2025 – Present</span>
+        </div>
+        <div class="exp-company">Nexora (Part of CBQA Global Group) — Jakarta</div>
+        <ul class="exp-list">
+          <li>Spearhead end-to-end development of enterprise platforms: Audit-Q, NexERP, OneAlpha &amp; OneDataHub, Odoo ERP</li>
+          <li>Define technical strategy, architect systems, and mentor the engineering team</li>
+          <li>Ensure system integrity, security compliance, and product scalability across all platforms</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-title">Senior IT Programmer</span>
+          <span class="exp-date">Feb 2024 – Nov 2025</span>
+        </div>
+        <div class="exp-company">CBQA Global — Jakarta</div>
+        <ul class="exp-list">
+          <li>Led feature development and critical bug resolution for internal mission-critical applications</li>
+          <li>Built robust backends with Java Spring Boot and PostgreSQL; integrated complex third-party APIs</li>
+          <li>Delivered strategic technical reports to stakeholders and executive leadership</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-title">Full-Stack Engineer</span>
+          <span class="exp-date">Nov 2022 – Feb 2024</span>
+        </div>
+        <div class="exp-company">Privat Talenta Indonesia — Jakarta</div>
+        <ul class="exp-list">
+          <li>Built core website systems and CMS platform from scratch</li>
+          <li>Developed cross-platform mobile apps (Android &amp; iOS) using Ionic and TypeScript</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-title">Product Dev Team Lead &amp; Engineer</span>
+          <span class="exp-date">Dec 2015 – Feb 2021</span>
+        </div>
+        <div class="exp-company">Telunjuk.com — Indonesia</div>
+        <ul class="exp-list">
+          <li>Led "Compas" — a market intelligence platform for automated e-commerce price tracking, adopted by major retail brands</li>
+          <li>Optimized platform for high-traffic scalability and improved core CMS SEO visibility</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="m-section">
+      <div class="m-title">Key Projects</div>
+      <div class="proj-grid">
+        <div class="proj-card">
+          <div class="proj-name">BeliRoyalEnfield.com</div>
+          <div class="proj-tech">Next.js · Node.js · E-Commerce</div>
+          <div class="proj-desc">Premium motorcycle e-commerce &amp; dealership platform for Royal Enfield Indonesia. Financing simulator, dealer locator, test-ride booking.</div>
+          <a class="proj-link" href="https://beliroyalenfield.com">beliroyalenfield.com ↗</a>
+        </div>
+        <div class="proj-card">
+          <div class="proj-name">PLN Energi Gas</div>
+          <div class="proj-tech">React · Spring Boot · Enterprise</div>
+          <div class="proj-desc">Corporate portal for state-owned gas infrastructure company. Pipeline, LNG/CNG, petroleum refining business lines.</div>
+          <a class="proj-link" href="https://plnenergigas.co.id">plnenergigas.co.id ↗</a>
+        </div>
+        <div class="proj-card">
+          <div class="proj-name">Audit-Q</div>
+          <div class="proj-tech">ERPNext · Frappe · Python</div>
+          <div class="proj-desc">Centralized audit management for ISO, ISCC, LVV &amp; LATIK certifications with QR-validated automated certificate issuance.</div>
+          <span class="proj-link" style="color:#64748b;">Internal Platform</span>
+        </div>
+        <div class="proj-card">
+          <div class="proj-name">Compas.co.id</div>
+          <div class="proj-tech">Python · Node.js · Web Crawling</div>
+          <div class="proj-desc">Market intelligence platform for real-time competitive price tracking and e-commerce trend analysis at scale.</div>
+          <a class="proj-link" href="https://compas.co.id">compas.co.id ↗</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+</body>
+</html>
