@@ -578,45 +578,8 @@
             display: flex;
             flex-direction: column;
         }
-        .project-card.featured {
-            grid-column: span 2;
-            flex-direction: row;
-        }
-        .project-card.featured .project-image { width: 45%; height: auto; min-height: 280px; }
-        .project-card.featured .project-info { width: 55%; display: flex; flex-direction: column; justify-content: center; }
+        .project-card.featured { grid-column: span 2; }
         .project-card:hover { transform: translateY(-10px) scale(1.01); border-color: rgba(99, 102, 241, 0.3); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4); }
-        .project-image {
-            width: 100%; height: 200px;
-            background: linear-gradient(135deg, #1e1b4b, #312e81);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .project-image::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(8, 8, 15, 0.85), rgba(8,8,15,0.1));
-        }
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top center;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-        .project-card:hover .project-image img { transform: scale(1.05); }
-        .project-image-content {
-            position: relative;
-            z-index: 1;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.1);
-        }
         .project-info { padding: 1.8rem; position: relative; z-index: 2; flex: 1; }
         .project-tags { display: flex; gap: 0.5rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
         .project-tag {
@@ -794,10 +757,7 @@
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .projects-grid { grid-template-columns: 1fr; }
-            .project-card.featured { grid-column: span 1; flex-direction: column; }
-            .project-card.featured .project-image,
-            .project-card.featured .project-info { width: 100%; }
-            .project-card.featured .project-image { height: 220px; min-height: auto; }
+            .project-card.featured { grid-column: span 1; }
             .skills-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
@@ -807,8 +767,10 @@
             .btn, .submit-btn, .lang-btn, .mobile-menu-btn, .project-card, .skill-card, .stat-item, .social-link { cursor: pointer; }
 
             nav { padding: 1rem 1.5rem; }
-            .nav-links, .lang-toggle { display: none; }
+            .nav-links { display: none; }
             .mobile-menu-btn { display: flex; }
+            .nav-right { gap: 0.75rem; }
+            .lang-btn { cursor: pointer; padding: 5px 10px; font-size: 0.7rem; }
 
             section { padding: 4rem 1.5rem; }
             .hero { padding-top: 8rem; }
@@ -831,8 +793,6 @@
             .skills-grid { grid-template-columns: 1fr; }
 
             .projects-grid { gap: 1.5rem; }
-            .project-image { height: 180px; }
-            .project-image-content { font-size: 2.2rem; }
             .project-info { padding: 1.5rem; }
             .project-info h3 { font-size: 1.15rem; }
 
@@ -842,16 +802,6 @@
 
             .social-links { gap: 1rem; }
             .social-link { width: 46px; height: 46px; }
-
-            .lang-toggle {
-                display: flex;
-                position: fixed;
-                bottom: 1.5rem;
-                right: 1.5rem;
-                z-index: 200;
-                box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            }
-            .lang-btn { cursor: pointer; }
         }
 
         @media (max-width: 480px) {
@@ -862,7 +812,6 @@
             .timeline { padding-left: 1rem; }
             .timeline-item { padding-left: 1.2rem; }
             .timeline-item::before { left: -1rem; }
-            .project-image { height: 160px; }
         }
     </style>
 </head>
@@ -895,10 +844,10 @@
                 <button class="lang-btn active" data-set-lang="en">EN</button>
                 <button class="lang-btn" data-set-lang="id">ID</button>
             </div>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
-        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
     </nav>
 
     <div class="mobile-nav" id="mobile-nav">
@@ -1214,9 +1163,6 @@
             </div>
             <div class="projects-grid">
                 <div class="project-card reveal">
-                    <div class="project-image">
-                        <img src="https://image.thum.io/get/width/800/crop/400/noanimate/https://beliroyalenfield.com" alt="BeliRoyalEnfield.com" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'project-image-content\'>RE</div>'">
-                    </div>
                     <div class="project-info">
                         <div class="project-tags">
                             <span class="project-tag">Next.js</span>
@@ -1234,9 +1180,6 @@
                     </div>
                 </div>
                 <div class="project-card reveal">
-                    <div class="project-image">
-                        <img src="https://image.thum.io/get/width/800/crop/400/noanimate/https://plnenergigas.co.id" alt="PLN Energi Gas" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'project-image-content\'>PLN</div>'">
-                    </div>
                     <div class="project-info">
                         <div class="project-tags">
                             <span class="project-tag">React</span>
@@ -1254,9 +1197,6 @@
                     </div>
                 </div>
                 <div class="project-card featured reveal">
-                    <div class="project-image">
-                        <img src="https://image.thum.io/get/width/800/crop/500/noanimate/https://netincom.id" alt="Netincom.id" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'project-image-content\'>NI</div>'">
-                    </div>
                     <div class="project-info">
                         <div class="project-tags">
                             <span class="project-tag">Web Development</span>
@@ -1274,9 +1214,6 @@
                     </div>
                 </div>
                 <div class="project-card reveal">
-                    <div class="project-image">
-                        <img src="https://image.thum.io/get/width/800/crop/400/noanimate/https://compas.co.id" alt="Compas.co.id" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'project-image-content\'>CP</div>'">
-                    </div>
                     <div class="project-info">
                         <div class="project-tags">
                             <span class="project-tag">Market Intelligence</span>
@@ -1294,7 +1231,6 @@
                     </div>
                 </div>
                 <div class="project-card reveal">
-                    <div class="project-image"><div class="project-image-content">AQ</div></div>
                     <div class="project-info">
                         <div class="project-tags">
                             <span class="project-tag">ERPNext</span>
@@ -1311,7 +1247,6 @@
                     </div>
                 </div>
                 <div class="project-card reveal">
-                    <div class="project-image"><div class="project-image-content">NE</div></div>
                     <div class="project-info">
                         <div class="project-tags">
                             <span class="project-tag">ERPNext v16</span>
@@ -1328,7 +1263,6 @@
                     </div>
                 </div>
                 <div class="project-card reveal">
-                    <div class="project-image"><div class="project-image-content">OA</div></div>
                     <div class="project-info">
                         <div class="project-tags">
                             <span class="project-tag">React</span>
