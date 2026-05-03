@@ -598,8 +598,17 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(8, 8, 15, 0.9), transparent);
+            background: linear-gradient(to top, rgba(8, 8, 15, 0.85), rgba(8,8,15,0.1));
         }
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .project-card:hover .project-image img { transform: scale(1.05); }
         .project-image-content {
             position: relative;
             z-index: 1;
@@ -1205,7 +1214,9 @@
             </div>
             <div class="projects-grid">
                 <div class="project-card reveal">
-                    <div class="project-image"><div class="project-image-content">RE</div></div>
+                    <div class="project-image">
+                        <img src="https://image.thum.io/get/width/800/crop/400/noanimate/https://beliroyalenfield.com" alt="BeliRoyalEnfield.com" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'project-image-content\'>RE</div>'">
+                    </div>
                     <div class="project-info">
                         <div class="project-tags">
                             <span class="project-tag">Next.js</span>
@@ -1223,7 +1234,9 @@
                     </div>
                 </div>
                 <div class="project-card reveal">
-                    <div class="project-image"><div class="project-image-content">PLN</div></div>
+                    <div class="project-image">
+                        <img src="https://image.thum.io/get/width/800/crop/400/noanimate/https://plnenergigas.co.id" alt="PLN Energi Gas" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'project-image-content\'>PLN</div>'">
+                    </div>
                     <div class="project-info">
                         <div class="project-tags">
                             <span class="project-tag">React</span>
@@ -1241,7 +1254,9 @@
                     </div>
                 </div>
                 <div class="project-card featured reveal">
-                    <div class="project-image"><div class="project-image-content">NI</div></div>
+                    <div class="project-image">
+                        <img src="https://image.thum.io/get/width/800/crop/500/noanimate/https://netincom.id" alt="Netincom.id" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'project-image-content\'>NI</div>'">
+                    </div>
                     <div class="project-info">
                         <div class="project-tags">
                             <span class="project-tag">Web Development</span>
@@ -1259,7 +1274,9 @@
                     </div>
                 </div>
                 <div class="project-card reveal">
-                    <div class="project-image"><div class="project-image-content">CP</div></div>
+                    <div class="project-image">
+                        <img src="https://image.thum.io/get/width/800/crop/400/noanimate/https://compas.co.id" alt="Compas.co.id" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'project-image-content\'>CP</div>'">
+                    </div>
                     <div class="project-info">
                         <div class="project-tags">
                             <span class="project-tag">Market Intelligence</span>
